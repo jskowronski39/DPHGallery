@@ -133,6 +133,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Attributes\AttachmentAttribute.cs" />
+    <Compile Include="Classes\Base64Utils.cs" />
     <Compile Include="Classes\DummyPerceptualHash.cs" />
     <Compile Include="Classes\HammingDistance.cs" />
     <Compile Include="Classes\FileManager.cs" />
