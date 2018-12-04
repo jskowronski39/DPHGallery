@@ -135,6 +135,7 @@
     <Compile Include="Attributes\AttachmentAttribute.cs" />
     <Compile Include="Classes\DummyPerceptualHash.cs" />
     <Compile Include="Classes\MD5Utils.cs" />
+    <Compile Include="Classes\ThumbnailGenerator.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
