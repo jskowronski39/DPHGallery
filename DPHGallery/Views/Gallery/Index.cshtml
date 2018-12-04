@@ -1,0 +1,20 @@
+﻿@model IEnumerable<DPHGallery.ORM.Entities.ImageEntity>
+
+<div class="row">
+    @foreach (var image in Model)
+    {
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="@Url.Action("GetImage", "Gallery", new { param = image.ThumbnailPath })" alt="@image.Description">
+                <div class="caption">
+                    <p>Autor: @image.Owner.ToString()</p>
+                    <p>MD5: @image.ImageHash</p>
+                    <p>DPH: @image.DPH</p>
+                    <p>
+                        <a href="@Url.Action("GetImage", "Gallery", new { param = image.ImagePath })" class="btn btn-primary" role="button">Pokaż</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
