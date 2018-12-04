@@ -21,6 +21,7 @@ namespace DPHGallery.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Upload(ImageUploadViewModel iuvm)
         {
             // In case of validation errors return view with error messages
