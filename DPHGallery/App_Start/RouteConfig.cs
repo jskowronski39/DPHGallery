@@ -16,7 +16,7 @@ namespace DPHGallery
 			routes.MapRoute(
 				name: "Default",
 				url: "{controller}/{action}/{param}",
-				defaults: new { controller = "Gallery", action = "Index", param = UrlParameter.Optional }
+				defaults: new { controller = "Gallery", action = "MyImages", param = UrlParameter.Optional }
 			);
 		}
 	}

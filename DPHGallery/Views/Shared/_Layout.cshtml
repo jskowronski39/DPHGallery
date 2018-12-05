@@ -20,19 +20,19 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Galeria", "Index", "Gallery")</li>
-                    <li>@Html.ActionLink("Moje zdjęcia", "MyImages", "Gallery")</li>
-                    <li>@Html.ActionLink("Prześlij zdjęcie", "Index", "Image")</li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Explore", "Index", "Gallery")</li>
+                        <li>@Html.ActionLink("My images", "MyImages", "Gallery")</li>
+                        <li>@Html.ActionLink("Submit image!", "Index", "Image")</li>
+                    }
                 </ul>
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Dummy Perceptual Hash Gallery</p>
-        </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

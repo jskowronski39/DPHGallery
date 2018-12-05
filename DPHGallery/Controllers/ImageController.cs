@@ -2,31 +2,36 @@
 using DPHGallery.Models.ViewModels;
 using DPHGallery.ORM.Contexts;
 using DPHGallery.ORM.Entities;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
 namespace DPHGallery.Controllers
 {
+    [Authorize]
     public class ImageController : Controller
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Prześlij zdjęcie";
+            ViewBag.Title = "Submit image!";
 
             return View();
         }
 
         [HttpPost]
-        public ActionResult Upload(ImageUploadViewModel iuvm)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Upload(ImageUploadViewModel iuvm)
         {
             // In case of validation errors return view with error messages
             if (!ModelState.IsValid)
                 return View("Index");
-            
+
             // Store image
             FileManager fm = new FileManager();
             Image image = Image.FromStream(iuvm.File.InputStream);
@@ -46,11 +51,12 @@ namespace DPHGallery.Controllers
             ent.ThumbnailPath = Base64Utils.Encode(thumbnailPath);
             ent.DPH = hash;
 
-            using (var ctx = new GalleryContext())
-            {
-                ctx.Images.Add(ent);
-                ctx.SaveChanges();
-            }
+            var ctx = new GalleryContext();
+            string userId = User.Identity.GetUserId();
+            var user = ctx.Users.Where(x => x.Id == userId).First();
+            ent.Owner = user;
+            ctx.Images.Add(ent);
+            await ctx.SaveChangesAsync();
 
             return RedirectToAction("MyImages", "Gallery");
         }

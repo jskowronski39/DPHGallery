@@ -15,3 +15,7 @@
 .dl-horizontal dt {
     white-space: normal;
 }
+
+input[type="checkbox"] {
+    margin-left: 0 !important;
+}

@@ -13,10 +13,10 @@ namespace DPHGallery.Models.ViewModels
 	{
 		/// TODO: Custom validator that validates file format and size
 		[AttachmentAttribute]
-		[Required(ErrorMessage = "Plik jest wymagany!")]
+		[Required(ErrorMessage = "Upload your image!")]
 		public HttpPostedFileBase File { get; set; }
 
-		[StringLength(255, ErrorMessage = "Opis nie może być dłuższy niż 255 znaków!")]
+		[StringLength(255, ErrorMessage = "Description is longer than 255 characters!")]
 		public string Description { get; set; }
 
 		/// <summary>

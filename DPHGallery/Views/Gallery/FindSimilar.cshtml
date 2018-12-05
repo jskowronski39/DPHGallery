@@ -1,18 +1,18 @@
 ﻿@model DPHGallery.Models.ViewModels.SimilarImagesViewModel
 
 <div class="row">
-    <div class="col-sm-12 col-md-12">
-        <h4>Zdjęcie będące kryterium wyszukiwania:</h4>
+    <div class="col-md-12">
+        <h2>Selected image:</h2>
+        <hr />
         <div class="thumbnail">
             <img src="@Url.Action("GetImage", "Gallery", new { param = Model.SourceImage.ThumbnailPath })" alt="@Model.SourceImage.Description">
             <div class="caption">
-                <p>Autor: @Model.SourceImage.Owner.ToString()</p>
+                <p>Autor: @Model.SourceImage.Owner.UserName</p>
                 <p>MD5: @Model.SourceImage.ImageHash</p>
                 <p>DPH: @Model.SourceImage.DPH</p>
                 <p>
-                    <a href="@Url.Action("GetImage", "Gallery", new { param = Model.SourceImage.ImagePath })" class="btn btn-primary" role="button">Pokaż</a>
-                    <a href="#" class="btn btn-default" role="button">Znajdź podobne</a>
-                    <a href="#" class="btn btn-danger" role="button">Usuń</a>
+                    <a href="@Url.Action("GetImage", "Gallery", new { param = Model.SourceImage.ImagePath })" class="btn btn-primary" role="button">Show</a>
+                    <a href="#" class="btn btn-default" role="button">Find similar</a>
                 </p>
             </div>
         </div>
@@ -20,17 +20,19 @@
 </div>
 
 <div class="row">
+    <h2>Images similar to the selected one:</h2>
+    <hr />
     @foreach (var image in Model.SimilarImages)
     {
-        <div class="col-sm-6 col-md-4">
+        <div class="col-md-4">
             <div class="thumbnail">
                 <img src="@Url.Action("GetImage", "Gallery", new { param = image.ThumbnailPath })" alt="@image.Description">
                 <div class="caption">
-                    <p>Autor: @image.Owner.ToString()</p>
+                    <p>Author: @image.Owner.UserName</p>
                     <p>MD5: @image.ImageHash</p>
                     <p>DPH: @image.DPH</p>
                     <p>
-                        <a href="@Url.Action("GetImage", "Gallery", new { param = image.ImagePath })" class="btn btn-primary" role="button">Pokaż</a>
+                        <a href="@Url.Action("GetImage", "Gallery", new { param = image.ImagePath })" class="btn btn-primary" role="button">Show</a>
                     </p>
                 </div>
             </div>
