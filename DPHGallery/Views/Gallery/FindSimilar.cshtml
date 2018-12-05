@@ -1,8 +1,9 @@
 ﻿@model DPHGallery.Models.ViewModels.SimilarImagesViewModel
 
 <div class="row">
-    <div class="col-sm-12 col-md-12">
-        <h4>Images similar to:</h4>
+    <div class="col-md-12">
+        <h2>Selected image:</h2>
+        <hr />
         <div class="thumbnail">
             <img src="@Url.Action("GetImage", "Gallery", new { param = Model.SourceImage.ThumbnailPath })" alt="@Model.SourceImage.Description">
             <div class="caption">
@@ -19,9 +20,11 @@
 </div>
 
 <div class="row">
+    <h2>Images similar to the selected one:</h2>
+    <hr />
     @foreach (var image in Model.SimilarImages)
     {
-        <div class="col-sm-6 col-md-4">
+        <div class="col-md-4">
             <div class="thumbnail">
                 <img src="@Url.Action("GetImage", "Gallery", new { param = image.ThumbnailPath })" alt="@image.Description">
                 <div class="caption">

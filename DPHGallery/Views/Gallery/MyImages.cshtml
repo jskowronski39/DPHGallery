@@ -1,6 +1,8 @@
 ﻿@model IEnumerable<DPHGallery.ORM.Entities.ImageEntity>
 
 <div class="row">
+    <h2>Uploaded images:</h2>
+    <hr />
     @foreach (var image in Model)
     {
         <div class="col-sm-6 col-md-4">
@@ -13,7 +15,7 @@
                     <p>
                         <a href="@Url.Action("GetImage", "Gallery", new { param = image.ImagePath })" class="btn btn-primary" role="button">Show</a>
                         <a href="@Url.Action("FindSimilar", "Gallery", new { param = image.Id })" class="btn btn-default" role="button">Find similar</a>
-                        <a href="#" class="btn btn-danger" role="button">Usuń</a>
+                        <a href="#" class="btn btn-danger" role="button">Delete</a>
                     </p>
                 </div>
             </div>
