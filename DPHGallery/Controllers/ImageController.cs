@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -25,7 +26,7 @@ namespace DPHGallery.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Upload(ImageUploadViewModel iuvm)
+        public async Task<ActionResult> Upload(ImageUploadViewModel iuvm)
         {
             // In case of validation errors return view with error messages
             if (!ModelState.IsValid)
@@ -55,7 +56,7 @@ namespace DPHGallery.Controllers
             var user = ctx.Users.Where(x => x.Id == userId).First();
             ent.Owner = user;
             ctx.Images.Add(ent);
-            ctx.SaveChanges();
+            await ctx.SaveChangesAsync();
 
             return RedirectToAction("MyImages", "Gallery");
         }
