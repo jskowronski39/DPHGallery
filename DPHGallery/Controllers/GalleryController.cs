@@ -2,6 +2,8 @@
 using DPHGallery.Models.ViewModels;
 using DPHGallery.ORM.Contexts;
 using DPHGallery.ORM.Entities;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -14,11 +16,12 @@ using System.Web.Mvc;
 
 namespace DPHGallery.Controllers
 {
+	[Authorize]
 	public class GalleryController : Controller
 	{
 		public ActionResult Index()
 		{
-			ViewBag.Title = "Galeria zdjęć użytkowników";
+			ViewBag.Title = "Explore";
 
 			var ctx = new GalleryContext();
 			var imagesCollection = ctx.Images.ToList();
@@ -28,10 +31,14 @@ namespace DPHGallery.Controllers
 
 		public ActionResult MyImages()
 		{
-			ViewBag.Title = "Moje zdjęcia";
+			ViewBag.Title = "My images";
 
 			var ctx = new GalleryContext();
-			var imagesCollection = ctx.Images.ToList();
+			string userId = User.Identity.GetUserId();
+			var user = ctx.Users.Where(x => x.Id == userId).First();
+			var imagesCollection = ctx.Images
+				.Where(x => x.OwnerId == user.Id)
+				.ToList();
 			
 			return View(imagesCollection);
 		}
@@ -51,10 +58,10 @@ namespace DPHGallery.Controllers
 			var ctx = new GalleryContext();
 			var imagesCollection = ctx.Images.ToList();
 
-			var img = imagesCollection.Find(x => x.Guid == param);
+			var img = imagesCollection.Find(x => x.Id == param);
 			var similarImages = imagesCollection.Where(
 				x =>
-					x.Guid != param
+					x.Id != param
 					&& HammingDistance.Calculate(
 						(byte)img.DPH, (byte)x.DPH) <= 4
 					)

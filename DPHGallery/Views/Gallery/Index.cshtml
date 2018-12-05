@@ -7,11 +7,11 @@
             <div class="thumbnail">
                 <img src="@Url.Action("GetImage", "Gallery", new { param = image.ThumbnailPath })" alt="@image.Description">
                 <div class="caption">
-                    <p>Autor: @image.Owner.ToString()</p>
+                    <p>Autor: @image.Owner.UserName</p>
                     <p>MD5: @image.ImageHash</p>
                     <p>DPH: @image.DPH</p>
                     <p>
-                        <a href="@Url.Action("GetImage", "Gallery", new { param = image.ImagePath })" class="btn btn-primary" role="button">Pokaż</a>
+                        <a href="@Url.Action("GetImage", "Gallery", new { param = image.ImagePath })" class="btn btn-primary" role="button">Show</a>
                     </p>
                 </div>
             </div>

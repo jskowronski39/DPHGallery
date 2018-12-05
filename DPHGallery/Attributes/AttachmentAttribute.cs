@@ -18,7 +18,7 @@ namespace DPHGallery.Attributes
 			// The maximum allowed file size is 2MB.
 			if (file.ContentLength > 2 * 1024 * 1024)
 			{
-				return new ValidationResult("Rozmiar pliku przekracza 2 MB!");
+				return new ValidationResult("File size exceeds 2 MB!");
 			}
 
 			// Only PDF can be uploaded.
@@ -28,7 +28,7 @@ namespace DPHGallery.Attributes
 				&& !ext.Equals(".png", StringComparison.OrdinalIgnoreCase))
 			)
 			{
-				return new ValidationResult("Dozwolone formaty plików to: PNG i JPG!");
+				return new ValidationResult("Allowed file formats are: PNG and JPG!");
 			}
 
 			// Everything OK.

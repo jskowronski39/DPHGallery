@@ -12,18 +12,25 @@ namespace DPHGallery.ORM.Entities
 	{
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public Guid Guid { get; set; }
+		public Guid Id { get; set; }
 
-		public Guid Owner { get; set; }
+		[ForeignKey("Owner")]
+		public string OwnerId { get; set; }
+
+		public virtual ApplicationUser Owner { get; set; }
 
 		public string Description { get; set; }
 
+		[Required]
 		public string ImagePath { get; set; }
 
+		[Required]
 		public string ThumbnailPath { get; set; }
 
+		[Required]
 		public string ImageHash { get; set; }
 
+		[Required]
 		public int DPH { get; set; }
 	}
 }
